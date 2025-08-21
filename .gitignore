@@ -1,0 +1,23 @@
+# Binary files
+MDK-ARM/bin/*
+MDK-ARM/RMAB_2019_Dev/*
+*.lst
+
+# User-specific GUI config
+*.uvguix*
+
+# Debug config
+MDK-ARM/DebugConfig/*
+
+# Temp files
+*.TMP
+*.tmp
+
+# STM32CubeMX files
+.mxproject
+
+# CMake
+build
+
+# Vscode
+.vscode
