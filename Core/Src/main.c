@@ -114,7 +114,6 @@ int main(void)
   MX_OCTOSPI1_Init();
   MX_SPI1_Init();
   MX_SPI2_Init();
-  MX_SPI3_Init();
   MX_TIM1_Init();
   MX_UART7_Init();
   MX_UART9_Init();
@@ -125,6 +124,7 @@ int main(void)
   MX_USB_OTG_HS_PCD_Init();
   MX_FDCAN2_Init();
   MX_TIM2_Init();
+  MX_UART5_Init();
   /* USER CODE BEGIN 2 */
 	Power_OUT1_ON;
 	Power_OUT2_ON;

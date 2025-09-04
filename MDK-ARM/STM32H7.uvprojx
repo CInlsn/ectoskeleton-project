@@ -1404,6 +1404,16 @@
               <FileType>1</FileType>
               <FilePath>..\User\Devices\Joint_control\gimble.c</FilePath>
             </File>
+            <File>
+              <FileName>func_lib.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\User\Devices\Joint_control\func_lib.h</FilePath>
+            </File>
+            <File>
+              <FileName>controller.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Devices\Joint_control\controller.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

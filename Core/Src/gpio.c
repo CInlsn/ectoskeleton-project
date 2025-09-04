@@ -47,7 +47,6 @@
      PB11   ------> I2C2_SDA
      PB15   ------> S_TIM12_CH2
      PA8   ------> RCC_MCO_1
-     PD2   ------> UART5_RX
      PE0   ------> UART8_RX
      PE1   ------> UART8_TX
 */
@@ -178,14 +177,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PD2 */
-  GPIO_InitStruct.Pin = GPIO_PIN_2;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF8_UART5;
-  HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PE0 PE1 */
   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;

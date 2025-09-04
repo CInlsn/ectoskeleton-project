@@ -59,3 +59,4 @@ stm32h7\freertos.o: ../User/Devices/Joint_control/gimble.h
 stm32h7\freertos.o: ../User/Devices/DM_Motor/dm_drv.h
 stm32h7\freertos.o: ../Core/Inc/fdcan.h
 stm32h7\freertos.o: ../User/bsp/can_bsp.h
+stm32h7\freertos.o: ../User/Devices/Joint_control/controller.h

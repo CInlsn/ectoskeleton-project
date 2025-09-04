@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "gimble.h"
+#include "controller.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -60,6 +61,13 @@ const osThreadAttr_t defaultTask_attributes = {
 osThreadId_t gimbleHandle;
 const osThreadAttr_t gimble_attributes = {
   .name = "gimbleTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+osThreadId_t controllerHandle;
+const osThreadAttr_t controller_attributes = {
+  .name = "controllerTask",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
@@ -101,6 +109,7 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
 	gimbleHandle = osThreadNew(gimbleTask, NULL, &gimble_attributes);
+	controllerHandle = osThreadNew(controller_Handle, NULL, &controller_attributes);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 
