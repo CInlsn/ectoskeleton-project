@@ -22,6 +22,7 @@
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
+#include "imu.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -71,6 +72,12 @@ const osThreadAttr_t controller_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+osThreadId_t imuHandle;
+const osThreadAttr_t imu_attributes = {
+  .name = "imuTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
@@ -110,6 +117,7 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_THREADS */
 	gimbleHandle = osThreadNew(gimbleTask, NULL, &gimble_attributes);
 	controllerHandle = osThreadNew(controller_Handle, NULL, &controller_attributes);
+	imuHandle = osThreadNew(imu_Task, NULL, &imu_attributes);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 

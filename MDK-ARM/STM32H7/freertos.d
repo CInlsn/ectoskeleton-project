@@ -55,6 +55,7 @@ stm32h7\freertos.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h
 stm32h7\freertos.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 stm32h7\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 stm32h7\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
+stm32h7\freertos.o: ../User/Devices/Joint_control/imu.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/gimble.h
 stm32h7\freertos.o: ../User/Devices/DM_Motor/dm_drv.h
 stm32h7\freertos.o: ../Core/Inc/fdcan.h

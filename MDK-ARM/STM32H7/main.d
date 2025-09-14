@@ -56,6 +56,7 @@ stm32h7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
 stm32h7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
 stm32h7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 stm32h7\main.o: ../Core/Inc/dcmi.h
+stm32h7\main.o: ../Core/Inc/dma.h
 stm32h7\main.o: ../Core/Inc/fdcan.h
 stm32h7\main.o: ../Core/Inc/i2c.h
 stm32h7\main.o: ../Core/Inc/octospi.h
