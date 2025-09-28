@@ -41,7 +41,6 @@
      PA5   ------> ADCx_INN18
      PA7   ------> SPI6_MOSI
      PC4   ------> ADCx_INP4
-     PB1   ------> S_TIM3_CH4
      PE14   ------> SPI4_MOSI
      PB10   ------> I2C2_SCL
      PB11   ------> I2C2_SDA
@@ -104,14 +103,6 @@ void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_ANALOG;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : PB1 */
-  GPIO_InitStruct.Pin = GPIO_PIN_1;
-  GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.Alternate = GPIO_AF2_TIM3;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pins : PE10 PE12 */
   GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_12;

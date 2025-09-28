@@ -2,7 +2,6 @@
 
 #include "fdcan.h"
 #include "arm_math.h"
-
 float Hex_To_Float(uint32_t *Byte,int num)//十六进制到浮点数
 {
 	return *((float*)Byte);
@@ -144,16 +143,16 @@ void disable_motor_mode(hcan_t* hcan, uint16_t motor_id, uint16_t mode_id)
 * @details:    	通过CAN总线向电机发送MIT模式下的控制帧。
 ************************************************************************
 **/
-void mit_ctrl(hcan_t* hcan, uint16_t motor_id, float pos, float vel,float kp, float kd, float torq)
+void mit_ctrl(hcan_t* hcan, uint16_t motor_id, dm_motor_info_t *dm_info)//float pos, float vel,float kp, float kd, float torq
 {
 	uint8_t data[8];
 	uint16_t pos_tmp,vel_tmp,kp_tmp,kd_tmp,tor_tmp;
 	uint16_t id = motor_id + MIT_MODE;
-	pos_tmp = float_to_uint(pos,  P_MIN,  P_MAX,  16);
-	vel_tmp = float_to_uint(vel,  V_MIN,  V_MAX,  12);
-	kp_tmp  = float_to_uint(kp,   KP_MIN, KP_MAX, 12);
-	kd_tmp  = float_to_uint(kd,   KD_MIN, KD_MAX, 12);
-	tor_tmp = float_to_uint(torq, T_MIN,  T_MAX,  12);
+	pos_tmp = float_to_uint(dm_info->motor_info.pos,  P_MIN,  P_MAX,  16);
+	vel_tmp = float_to_uint(dm_info->motor_info.vel,  V_MIN,  V_MAX,  12);
+	kp_tmp  = float_to_uint(dm_info->con_parameter.Kp,   KP_MIN, KP_MAX, 12);
+	kd_tmp  = float_to_uint(dm_info->con_parameter.Kd,   KD_MIN, KD_MAX, 12);
+	tor_tmp = float_to_uint(dm_info->con_parameter.Tq, T_MIN,  T_MAX,  12);
 
 	data[0] = (pos_tmp >> 8);
 	data[1] = pos_tmp;

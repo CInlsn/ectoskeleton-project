@@ -1,7 +1,7 @@
 stm32h7\freertos.o: ../Core/Src/freertos.c
 stm32h7\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-stm32h7\freertos.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
-stm32h7\freertos.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+stm32h7\freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+stm32h7\freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32h7\freertos.o: ../Core/Inc/FreeRTOSConfig.h
 stm32h7\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 stm32h7\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
@@ -25,7 +25,7 @@ stm32h7\freertos.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 stm32h7\freertos.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h
 stm32h7\freertos.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
 stm32h7\freertos.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-stm32h7\freertos.o: D:\Keil\ARM\ARMCC\Bin\..\include\math.h
+stm32h7\freertos.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 stm32h7\freertos.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h
 stm32h7\freertos.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h
 stm32h7\freertos.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio_ex.h
@@ -55,9 +55,10 @@ stm32h7\freertos.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h
 stm32h7\freertos.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 stm32h7\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h
 stm32h7\freertos.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
-stm32h7\freertos.o: ../User/Devices/Joint_control/imu.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/gimble.h
 stm32h7\freertos.o: ../User/Devices/DM_Motor/dm_drv.h
 stm32h7\freertos.o: ../Core/Inc/fdcan.h
 stm32h7\freertos.o: ../User/bsp/can_bsp.h
+stm32h7\freertos.o: ../User/Devices/Joint_control/dm_info.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/controller.h
+stm32h7\freertos.o: ../User/Devices/Joint_control/imu.h

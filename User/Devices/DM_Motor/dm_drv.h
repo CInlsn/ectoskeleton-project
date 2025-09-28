@@ -3,6 +3,7 @@
 #include "main.h"
 #include "fdcan.h"
 #include "can_bsp.h"
+#include "dm_info.h"
 
 #define MIT_MODE 			0x000
 #define POS_MODE			0x100
@@ -57,7 +58,7 @@ extern void enable_motor_mode(hcan_t* hcan, uint16_t motor_id, uint16_t mode_id)
 extern void disable_motor_mode(hcan_t* hcan, uint16_t motor_id, uint16_t mode_id);
 
 //关节电机
-extern void mit_ctrl(hcan_t* hcan, uint16_t motor_id, float pos, float vel,float kp, float kd, float torq);
+extern void mit_ctrl(hcan_t* hcan, uint16_t motor_id, dm_motor_info_t *dm_info);
 extern void pos_speed_ctrl(hcan_t* hcan,uint16_t motor_id, float pos, float vel);
 extern void speed_ctrl(hcan_t* hcan,uint16_t motor_id, float _vel);
 

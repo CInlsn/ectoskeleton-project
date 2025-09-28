@@ -1,4 +1,5 @@
 stm32h7\gimble.o: ..\User\Devices\Joint_control\gimble.c
+stm32h7\gimble.o: ..\User\Devices\Joint_control\gimble.h
 stm32h7\gimble.o: ../User/Devices/DM_Motor/dm_drv.h
 stm32h7\gimble.o: ../Core/Inc/main.h
 stm32h7\gimble.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
@@ -8,7 +9,7 @@ stm32h7\gimble.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h
 stm32h7\gimble.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h
 stm32h7\gimble.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/stm32h723xx.h
 stm32h7\gimble.o: ../Drivers/CMSIS/Include/core_cm7.h
-stm32h7\gimble.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+stm32h7\gimble.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 stm32h7\gimble.o: ../Drivers/CMSIS/Include/cmsis_version.h
 stm32h7\gimble.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
 stm32h7\gimble.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
@@ -16,8 +17,8 @@ stm32h7\gimble.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 stm32h7\gimble.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h
 stm32h7\gimble.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
 stm32h7\gimble.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-stm32h7\gimble.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
-stm32h7\gimble.o: D:\Keil\ARM\ARMCC\Bin\..\include\math.h
+stm32h7\gimble.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+stm32h7\gimble.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 stm32h7\gimble.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h
 stm32h7\gimble.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h
 stm32h7\gimble.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio_ex.h
@@ -47,7 +48,7 @@ stm32h7\gimble.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h
 stm32h7\gimble.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h
 stm32h7\gimble.o: ../Core/Inc/fdcan.h
 stm32h7\gimble.o: ../User/bsp/can_bsp.h
-stm32h7\gimble.o: ..\User\Devices\Joint_control\gimble.h
+stm32h7\gimble.o: ../User/Devices/Joint_control/dm_info.h
 stm32h7\gimble.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
 stm32h7\gimble.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
 stm32h7\gimble.o: ../Core/Inc/FreeRTOSConfig.h
@@ -56,4 +57,4 @@ stm32h7\gimble.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
 stm32h7\gimble.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
 stm32h7\gimble.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
 stm32h7\gimble.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
-stm32h7\gimble.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32h7\gimble.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h

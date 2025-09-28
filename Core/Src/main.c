@@ -127,6 +127,7 @@ int main(void)
   MX_FDCAN2_Init();
   MX_TIM2_Init();
   MX_UART5_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
 	Power_OUT1_ON;
 	Power_OUT2_ON;

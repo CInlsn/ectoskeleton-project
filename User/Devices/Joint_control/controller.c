@@ -24,7 +24,7 @@ uint8_t RxTemp = 0;
 
 int aaa = 0 ;
 
-
+controller_t controller;
 // Parses SBUS data into channel values  解析SBUS的数据，转化成通道数值。
 static int controller_Parse_Data(void)
 {
@@ -91,6 +91,31 @@ void controller_Reveive(uint8_t data)
     }
 }
 
+void controller_solve(int16_t *data){
+	for (int i = 0;i < 4; i++){
+		if (data[i]<=CHANNEL_MAX && data[i]>=CHANNEL_MIN){
+			controller.channel[i] = 2.0f * (data[i] - CHANNEL_MEDIUM) /(CHANNEL_MAX - CHANNEL_MIN);
+		}
+	}
+	controller.SW[0] = MID;
+	for (int i = 4 ; i<8 ;i++){
+		switch (data[i]){
+			case CHANNEL_MAX:
+				controller.SW[i-3] = DOWN;
+				break;
+			case CHANNEL_MEDIUM:
+				controller.SW[i-3] = MID;
+				break;
+			case CHANNEL_MIN:
+				controller.SW[i-3] = UP;
+				break;
+			default:
+				break;
+			
+		}
+	}
+}
+
 void USART_Init(void)
 {
     HAL_UART_Receive_IT(&huart5, (uint8_t *)&RxTemp, 1);
@@ -113,6 +138,7 @@ void controller_Handle(void *argument)
 		    if (sbus_new_cmd)
     {
         int res = controller_Parse_Data();
+				controller_solve(g_sbus_channels);
         sbus_new_cmd = 0;
         if (res) return;
     }
