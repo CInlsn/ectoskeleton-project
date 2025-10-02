@@ -17,5 +17,10 @@ typedef struct {
 	motor_info_t motor_info;
 }dm_motor_info_t;
 
+#define ROD_LMAX 1.5
+#define ROD_RMAX 5.05
+#define ROD_LMIN -0.8
+#define ROD_RMIN 2.72
+#define DF_LIMIT 0.346
 #endif
 

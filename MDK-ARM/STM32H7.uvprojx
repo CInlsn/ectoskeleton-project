@@ -16,7 +16,7 @@
         <TargetCommonOption>
           <Device>STM32H723VGTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32H7xx_DFP.3.1.1</PackID>
+          <PackID>Keil.STM32H7xx_DFP.4.0.0</PackID>
           <PackURL>https://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000-0x2001FFFF) IRAM2(0x24000000-0x2404FFFF) IROM(0x8000000-0x80FFFFF) CLOCK(12000000) FPU3(DFPU) CPUTYPE("Cortex-M7") ELITTLE TZ</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
@@ -1456,11 +1456,6 @@
           <GroupName>Usr</GroupName>
           <Files>
             <File>
-              <FileName>gimble.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\User\Devices\Joint_control\gimble.c</FilePath>
-            </File>
-            <File>
               <FileName>func_lib.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\Devices\Joint_control\func_lib.h</FilePath>
@@ -1479,6 +1474,11 @@
               <FileName>dm_info.h</FileName>
               <FileType>5</FileType>
               <FilePath>..\User\Devices\Joint_control\dm_info.h</FilePath>
+            </File>
+            <File>
+              <FileName>main_control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\User\Devices\Joint_control\main_control.c</FilePath>
             </File>
           </Files>
         </Group>

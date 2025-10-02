@@ -10,8 +10,8 @@
 #define SPEED_MODE		0x200
 
 //以下是DM4310的参数，用其他电机需要更改下面参数
-#define P_MIN -3.1415926f
-#define P_MAX 3.1415926f
+#define P_MIN -12.5f
+#define P_MAX 12.5f
 #define V_MIN -30.0f
 #define V_MAX 30.0f
 #define KP_MIN 0.0f
@@ -20,6 +20,7 @@
 #define KD_MAX 5.0f
 #define T_MIN -10.0f
 #define T_MAX 10.0f
+#define POS_TO_ANGLE 180 / 3.1415926f
 
 
 typedef struct 

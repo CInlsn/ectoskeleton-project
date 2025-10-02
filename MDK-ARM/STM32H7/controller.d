@@ -1,7 +1,7 @@
 stm32h7\controller.o: ..\User\Devices\Joint_control\controller.c
 stm32h7\controller.o: ..\User\Devices\Joint_control\controller.h
-stm32h7\controller.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-stm32h7\controller.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32h7\controller.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
+stm32h7\controller.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
 stm32h7\controller.o: ../Core/Inc/usart.h
 stm32h7\controller.o: ../Core/Inc/main.h
 stm32h7\controller.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
@@ -18,8 +18,8 @@ stm32h7\controller.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 stm32h7\controller.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h
 stm32h7\controller.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
 stm32h7\controller.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-stm32h7\controller.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-stm32h7\controller.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+stm32h7\controller.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+stm32h7\controller.o: D:\Keil\ARM\ARMCC\Bin\..\include\math.h
 stm32h7\controller.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h
 stm32h7\controller.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h
 stm32h7\controller.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio_ex.h

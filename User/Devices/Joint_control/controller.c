@@ -97,14 +97,14 @@ void controller_solve(int16_t *data){
 			controller.channel[i] = 2.0f * (data[i] - CHANNEL_MEDIUM) /(CHANNEL_MAX - CHANNEL_MIN);
 		}
 	}
-	controller.SW[0] = MID;
+	controller.SW[0] = MIED;
 	for (int i = 4 ; i<8 ;i++){
 		switch (data[i]){
 			case CHANNEL_MAX:
 				controller.SW[i-3] = DOWN;
 				break;
 			case CHANNEL_MEDIUM:
-				controller.SW[i-3] = MID;
+				controller.SW[i-3] = MIED;
 				break;
 			case CHANNEL_MIN:
 				controller.SW[i-3] = UP;

@@ -1,9 +1,9 @@
 stm32h7\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/tasks.c
-stm32h7\tasks.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-stm32h7\tasks.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+stm32h7\tasks.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32h7\tasks.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
 stm32h7\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-stm32h7\tasks.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-stm32h7\tasks.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32h7\tasks.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+stm32h7\tasks.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 stm32h7\tasks.o: ../Core/Inc/FreeRTOSConfig.h
 stm32h7\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
 stm32h7\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h

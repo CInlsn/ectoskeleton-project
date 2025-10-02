@@ -9,17 +9,13 @@
 #define CHANNEL_MAX 1792
 #define CHANNEL_MEDIUM 992
 #define CHANNEL_MIN 192
-
-typedef enum{
-	UP,
-	MID,
-	DOWN,
-}sw_e;
-
+#define UP 3
+#define MIED 2
+#define DOWN 1
 
 typedef struct{
 	float channel[4];
-	sw_e SW[5];
+	int SW[5];
 }controller_t;
 
 extern controller_t controller;

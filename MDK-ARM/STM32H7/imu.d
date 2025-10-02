@@ -1,6 +1,6 @@
 stm32h7\imu.o: ..\User\Devices\Joint_control\imu.c
 stm32h7\imu.o: ..\User\Devices\Joint_control\imu.h
-stm32h7\imu.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+stm32h7\imu.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdint.h
 stm32h7\imu.o: ../Components/pid.h
 stm32h7\imu.o: ../Core/Inc/spi.h
 stm32h7\imu.o: ../Core/Inc/main.h
@@ -18,8 +18,8 @@ stm32h7\imu.o: ../Drivers/CMSIS/Include/mpu_armv7.h
 stm32h7\imu.o: ../Drivers/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h
 stm32h7\imu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h
 stm32h7\imu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
-stm32h7\imu.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-stm32h7\imu.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+stm32h7\imu.o: D:\Keil\ARM\ARMCC\Bin\..\include\stddef.h
+stm32h7\imu.o: D:\Keil\ARM\ARMCC\Bin\..\include\math.h
 stm32h7\imu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h
 stm32h7\imu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h
 stm32h7\imu.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio_ex.h

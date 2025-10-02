@@ -77,6 +77,7 @@ void dm_fbdata(Joint_Motor_t *motor, uint8_t *rx_data,uint32_t data_len)
 	  motor->para.v_int=(rx_data[3]<<4)|(rx_data[4]>>4);
 	  motor->para.t_int=((rx_data[4]&0xF)<<8)|rx_data[5];
 	  motor->para.pos = uint_to_float(motor->para.p_int, P_MIN, P_MAX, 16); // 
+		motor->para.angle = motor->para.pos * POS_TO_ANGLE;
 	  motor->para.vel = uint_to_float(motor->para.v_int, V_MIN, V_MAX, 12); // 
 	  motor->para.tor = uint_to_float(motor->para.t_int, T_MIN, T_MAX, 12);  // 
 	  motor->para.Tmos = (float)(rx_data[6]);
@@ -148,7 +149,7 @@ void mit_ctrl(hcan_t* hcan, uint16_t motor_id, dm_motor_info_t *dm_info)//float 
 	uint8_t data[8];
 	uint16_t pos_tmp,vel_tmp,kp_tmp,kd_tmp,tor_tmp;
 	uint16_t id = motor_id + MIT_MODE;
-	pos_tmp = float_to_uint(dm_info->motor_info.pos,  P_MIN,  P_MAX,  16);
+	pos_tmp = float_to_uint(dm_info->motor_info.pos, P_MIN,  P_MAX,  16);
 	vel_tmp = float_to_uint(dm_info->motor_info.vel,  V_MIN,  V_MAX,  12);
 	kp_tmp  = float_to_uint(dm_info->con_parameter.Kp,   KP_MIN, KP_MAX, 12);
 	kd_tmp  = float_to_uint(dm_info->con_parameter.Kd,   KD_MIN, KD_MAX, 12);
