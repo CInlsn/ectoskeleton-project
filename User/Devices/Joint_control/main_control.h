@@ -22,8 +22,14 @@ typedef enum{
 }body_mode_e;
 
 typedef struct{
+	float postemp_set;
+	float last_pos;
+}pos_set_t;
+
+typedef struct{
 	control_mode_e control_mode;
 	body_mode_e body_mode;
+	pos_set_t pos_set[10];
 }main_control_t;
 
 extern dm_motor_info_t dm_motor_info[16];

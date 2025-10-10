@@ -62,14 +62,14 @@ const osThreadAttr_t defaultTask_attributes = {
 osThreadId_t main_control_Handle;
 const osThreadAttr_t main_control_attributes = {
   .name = "mainTask",
-  .stack_size = 128 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 
 osThreadId_t controllerHandle;
 const osThreadAttr_t controller_attributes = {
   .name = "controllerTask",
-  .stack_size = 128 * 4,
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 osThreadId_t imuHandle;

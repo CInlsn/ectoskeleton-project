@@ -80,7 +80,7 @@ void controller_Reveive(uint8_t data)
     }
 
     // Finish receiving a frame of data  完成接收一帧数据
-    if (sbus_start & (sbus_buf_index >= (SBUS_RECV_MAX - 1)))
+    if (sbus_start && (sbus_buf_index >= (SBUS_RECV_MAX - 1)))
     {
         sbus_start = 0;
         if (inBuffer[SBUS_RECV_MAX - 1] == SBUS_END)
@@ -97,14 +97,14 @@ void controller_solve(int16_t *data){
 			controller.channel[i] = 2.0f * (data[i] - CHANNEL_MEDIUM) /(CHANNEL_MAX - CHANNEL_MIN);
 		}
 	}
-	controller.SW[0] = MIED;
+	controller.SW[0] = MID;
 	for (int i = 4 ; i<8 ;i++){
 		switch (data[i]){
 			case CHANNEL_MAX:
 				controller.SW[i-3] = DOWN;
 				break;
 			case CHANNEL_MEDIUM:
-				controller.SW[i-3] = MIED;
+				controller.SW[i-3] = MID;
 				break;
 			case CHANNEL_MIN:
 				controller.SW[i-3] = UP;
