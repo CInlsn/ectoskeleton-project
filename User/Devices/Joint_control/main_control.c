@@ -137,14 +137,17 @@ void mode_active(){
 				mit_ctrl(&hfdcan1,motor[3].para.id,&dm_motor_info[0]);
 			}
 			else if (main_control.body_mode == CALF){
-				main_control.pos_set[1].postemp_set = main_control.pos_set[1].last_pos + 0.1f * controller.channel[1] - 0.05f * controller.channel[0];
-				main_control.pos_set[3].postemp_set = main_control.pos_set[3].last_pos - 0.1f * controller.channel[1] - 0.05f * controller.channel[0];
-				
-				if ((ROD_LMAX-main_control.pos_set[1].postemp_set)-(main_control.pos_set[3].postemp_set-ROD_RMIN)>DF_LIMIT && \
+				int tmp_flag = 1;
+				if ((ROD_LMAX-main_control.pos_set[1].postemp_set)-(main_control.pos_set[3].postemp_set-ROD_RMIN)>DF_LIMIT || \
 					(ROD_LMAX-main_control.pos_set[1].postemp_set)-(main_control.pos_set[3].postemp_set-ROD_RMIN) < -DF_LIMIT){
-					main_control.pos_set[1].postemp_set = main_control.pos_set[1].last_pos + 0.1f * controller.channel[1];
-					main_control.pos_set[3].postemp_set = main_control.pos_set[3].last_pos - 0.1f * controller.channel[1];
+					tmp_flag = 0;
 				}
+				
+				
+				main_control.pos_set[1].postemp_set = main_control.pos_set[1].last_pos + 0.1f * controller.channel[1] - 0.05f * controller.channel[0]*tmp_flag;
+				main_control.pos_set[3].postemp_set = main_control.pos_set[3].last_pos - 0.1f * controller.channel[1] - 0.05f * controller.channel[0]*tmp_flag;
+				
+
 					
 				val_limit(&main_control.pos_set[1].postemp_set,ROD_LMIN ,ROD_LMAX);
 				val_limit(&main_control.pos_set[3].postemp_set,ROD_RMIN ,ROD_RMAX);
