@@ -80,40 +80,29 @@ void UnitreeMotor_SendCommand(uint8_t Motor_Index, UART_HandleTypeDef* control_h
 	while (__HAL_UART_GET_FLAG(control_huart, UART_FLAG_RXNE)){
     volatile uint8_t garbage = (uint8_t)(control_huart->Instance->RDR);
 }
-	// it depends on which huart is using
-//	if (control_huart == &huart2){HAL_GPIO_WritePin(RS485_DIR2_GPIO_Port, RS485_DIR2_Pin, GPIO_PIN_SET);}
-//	if (control_huart == &huart3){HAL_GPIO_WritePin(RS485_DIR3_GPIO_Port, RS485_DIR3_Pin, GPIO_PIN_SET);}
 	HAL_UART_Transmit_DMA(control_huart, (uint8_t* )&UnitreeMotors_Command[Motor_Index], 34);
 }
 
-void UnitreeMotor_ReceiveCommand(uint8_t* rxBuffer, uint8_t Motor_Index){
+void UnitreeMotor_ReceiveCommand(uint8_t* rxBuffer){
 	UnitreeMotor_A1_Status_t* temp_signal_ptr =((UnitreeMotor_A1_Status_t*)rxBuffer);
-	recv_crc = (uint32_t)rxBuffer[74] |
-                        ((uint32_t)rxBuffer[75] << 8) |
-                        ((uint32_t)rxBuffer[76] << 16) |
-                        ((uint32_t)rxBuffer[77] << 24);
-	if(crc32_core((uint32_t*)rxBuffer,18) == temp_signal_ptr->CRCdata){//19
+	uint8_t motor_id = temp_signal_ptr->COMHead.motorID;
+
+	if(crc32_core((uint32_t*)rxBuffer,18) == temp_signal_ptr->CRCdata ){//19
 		correct++;
-		UnitreeMotors_Status[Motor_Index] = *temp_signal_ptr;
-		UnitreeMotors_Pos[Motor_Index] = UnitreeMotors_Status[Motor_Index].ServoComdV3.Motor_Pos;
-		UnitreeMotors_Tor[Motor_Index] = UnitreeMotors_Status[Motor_Index].ServoComdV3.T_torque;
+		UnitreeMotors_Status[motor_id] = *temp_signal_ptr;
+		UnitreeMotors_Pos[motor_id] = UnitreeMotors_Status[motor_id].ServoComdV3.Motor_Pos;
+		UnitreeMotors_Tor[motor_id] = UnitreeMotors_Status[motor_id].ServoComdV3.T_torque;
 	}else
 	mistaken++;
 }
 void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart){
-    // 切换 RS485 方向
-//    if (huart == &huart2)
-//        HAL_GPIO_WritePin(RS485_DIR2_GPIO_Port, RS485_DIR2_Pin, GPIO_PIN_RESET);
-//    else if (huart == &huart3)
-//        HAL_GPIO_WritePin(RS485_DIR3_GPIO_Port, RS485_DIR3_Pin, GPIO_PIN_RESET);
-		
     HAL_UART_Receive_DMA(huart,UnitreeMotors_Info[currentSendingMotorIndex].rxBuffer, 78);
 }
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
 		if (huart == &huart2){
-		UnitreeMotor_ReceiveCommand(UnitreeMotors_Info[currentSendingMotorIndex].rxBuffer,currentSendingMotorIndex);
+		UnitreeMotor_ReceiveCommand(UnitreeMotors_Info[currentSendingMotorIndex].rxBuffer);
 		}
 }
 
@@ -144,16 +133,19 @@ int16_t UnitreeMotor_SetCurrent(int32_t Motor_Index, int16_t Torque){
 
 void unitree_motorTask(void *argument){
 	UnitreeMotor_Info_initialize();
-	osDelay(1000);
 	for (int i = 0; i < 3; i++){
      UnitreeMotor_SetOutputMode(i, UNITREE_MOTOR_ON);
-     UnitreeMotor_SetCurrent(i, 5); // 小电流旋转，合法命令
-  }
-	while(1){
-		for (int i = 2; i >= 0; i--){
-			UnitreeMotor_SendCommand(i,&huart2);
-			osDelay(10);
-		}
+  }  
+	while(1){		
+		UnitreeMotor_SetCurrent(0, 5);
+		UnitreeMotor_SendCommand(0,&huart2);
+		osDelay(3);
+		UnitreeMotor_SetCurrent(1, 5);
+		UnitreeMotor_SendCommand(1,&huart2);
+		osDelay(3);
+		UnitreeMotor_SetCurrent(2, 5);
+		UnitreeMotor_SendCommand(2,&huart2);
+		osDelay(3);
 	}
 }
 

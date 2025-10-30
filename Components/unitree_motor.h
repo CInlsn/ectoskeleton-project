@@ -95,7 +95,7 @@ int16_t UnitreeMotor_set(int32_t Motor_Index, int16_t Torque);
 
 void UnitreeMotor_Changer(void*_);
 
-void UnitreeMotor_ReceiveCommand(uint8_t* rxBuffer,uint8_t motorID);
+void UnitreeMotor_ReceiveCommand(uint8_t* rxBuffer);
 
 void UnitreeMotor_SetOutputMode(int32_t motor_index, Unitree_Motor_Output_Mode_e mode);
 #endif
