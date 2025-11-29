@@ -22,8 +22,8 @@ typedef enum{
 }body_mode_e;
 
 typedef struct{
-	float postemp_set;
-	float last_pos;
+	float xouttemp_set;
+	float last_xout;
 }pos_set_t;
 
 typedef struct{
@@ -36,4 +36,6 @@ extern dm_motor_info_t dm_motor_info[16];
 extern main_control_t main_control;
 
 void mainTask(void *argument);
+void XoutTask_CAN1(void *argument);
+void XoutTask_CAN2(void *argument);
 #endif

@@ -17,12 +17,16 @@ typedef struct {
 	motor_info_t motor_info;
 }dm_motor_info_t;
 
-#define ROD_LINIT -0.4f
-#define ROD_RINIT	4.64f
-#define ROD_LMAX 1.5f
-#define ROD_RMAX 5.05f
-#define ROD_LMIN -0.8f
-#define ROD_RMIN 2.72f
-#define DF_LIMIT 0.346f
+#define ROD_LINIT 0
+#define ROD_RINIT	0
+#define ROD_LMAX 0.87f
+#define ROD_RMAX 0.5f
+#define ROD_LMIN -0.5f
+#define ROD_RMIN -0.87f
+#define DF_LIMIT 0.15f
+
+#define KNEE_INIT 0
+#define KNEE_MAX 0.5f
+#define KNEE_MIN -0.5f
 #endif
 

@@ -73,7 +73,7 @@ void FDCAN2_Config(void)
   }
 
   /* Activate Rx FIFO 0 new message notification on both FDCAN instances */
-  if (HAL_FDCAN_ActivateNotification(&hfdcan2, FDCAN_IT_RX_FIFO1_NEW_MESSAGE, 0) != HAL_OK)
+  if (HAL_FDCAN_ActivateNotification(&hfdcan2, FDCAN_IT_RX_FIFO1_FULL | FDCAN_IT_RX_FIFO1_NEW_MESSAGE, 0) != HAL_OK)
   {
     Error_Handler();
   }
@@ -146,7 +146,19 @@ void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
       /* Retrieve Rx messages from RX FIFO0 */
 			memset(g_Can1RxData, 0, sizeof(g_Can1RxData));	//接收前先清空数组	
       HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader1, g_Can1RxData);
-			dm_fbdata(&motor[RxHeader1.Identifier+1], g_Can1RxData,RxHeader1.DataLength);
+			uint16_t idx = RxHeader1.Identifier;
+			if (g_Can1RxData[2] == 0x33 && g_Can1RxData[3] == 0x51){
+        float xout;
+        memcpy(&xout, &g_Can1RxData[4], 4);
+        motor[idx].para.xout = xout;
+        if (!motor[idx].para.offset_inited && motor[idx].para.pos_m != 0.0f){
+            motor[idx].para.pos_offset   = motor[idx].para.pos_m - motor[idx].para.xout;
+            motor[idx].para.offset_inited = 1;
+        }
+      }
+      else{// ---- 情况 2：正常反馈帧（MIT） ----
+        dm_fbdata(&motor[idx], g_Can1RxData, RxHeader1.DataLength);
+      }
 			a2++;
 	  }
   }
@@ -161,7 +173,20 @@ void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
       /* Retrieve Rx messages from RX FIFO0 */
 			memset(g_Can2RxData, 0, sizeof(g_Can2RxData));
       HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO1, &RxHeader2, g_Can2RxData);
-      dm_fbdata(&motor[RxHeader2.Identifier+1], g_Can2RxData,RxHeader2.DataLength);
+			uint16_t idx = RxHeader2.Identifier;
+			if (g_Can2RxData[2] == 0x33 && g_Can2RxData[3] == 0x51){
+        float xout;
+        memcpy(&xout, &g_Can2RxData[4], 4);
+        motor[idx].para.xout = xout;
+// 如果此时已经有 p_m，则可以算 offset
+        if (!motor[idx].para.offset_inited && motor[idx].para.pos_m != 0.0f){
+            motor[idx].para.pos_offset   = motor[idx].para.pos_m - motor[idx].para.xout;
+            motor[idx].para.offset_inited = 1;
+        }
+      }
+      else{// ---- 情况 2：正常反馈帧（MIT） ----
+        dm_fbdata(&motor[idx], g_Can2RxData, RxHeader2.DataLength);
+      }
     }
   }
 }

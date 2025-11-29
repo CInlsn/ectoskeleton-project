@@ -142,7 +142,7 @@ void controller_Handle(void *argument)
         sbus_new_cmd = 0;
         if (res) return;
     }
-		osDelay(10);
+		osDelay(1);
 }
 }
 

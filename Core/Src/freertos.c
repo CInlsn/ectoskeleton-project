@@ -66,6 +66,20 @@ const osThreadAttr_t main_control_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 
+osThreadId_t xout_can1_Handle;
+const osThreadAttr_t xout_can1_attributes = {
+  .name = "Xout_can1Task",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+osThreadId_t xout_can2_Handle;
+const osThreadAttr_t xout_can2_attributes = {
+  .name = "Xout_can2Task",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
 osThreadId_t controllerHandle;
 const osThreadAttr_t controller_attributes = {
   .name = "controllerTask",
@@ -116,6 +130,8 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
 	main_control_Handle = osThreadNew(mainTask, NULL, &main_control_attributes);
+	xout_can1_Handle = osThreadNew(XoutTask_CAN1, NULL, &xout_can1_attributes);
+	xout_can2_Handle = osThreadNew(XoutTask_CAN2, NULL, &xout_can2_attributes);
 	controllerHandle = osThreadNew(controller_Handle, NULL, &controller_attributes);
 	imuHandle = osThreadNew(imu_Task, NULL, &imu_attributes);
   /* add threads, ... */

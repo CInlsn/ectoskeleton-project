@@ -2,6 +2,8 @@
 
 #include "fdcan.h"
 #include "arm_math.h"
+
+extern Joint_Motor_t motor[15];
 float Hex_To_Float(uint32_t *Byte,int num)//十六进制到浮点数
 {
 	return *((float*)Byte);
@@ -69,22 +71,45 @@ void joint_motor_init(Joint_Motor_t *motor,uint16_t id,uint16_t mode)
 **/
 void dm_fbdata(Joint_Motor_t *motor, uint8_t *rx_data,uint32_t data_len)
 { 
-	if(data_len==FDCAN_DLC_BYTES_8)
-	{//返回的数据有8个字节
-	  motor->para.id = (rx_data[0])&0x0F;
-	  motor->para.state = (rx_data[0])>>4;
-	  motor->para.p_int=(rx_data[1]<<8)|rx_data[2];
-	  motor->para.v_int=(rx_data[3]<<4)|(rx_data[4]>>4);
-	  motor->para.t_int=((rx_data[4]&0xF)<<8)|rx_data[5];
-	  motor->para.pos = uint_to_float(motor->para.p_int, P_MIN, P_MAX, 16); // 
-		motor->para.angle = motor->para.pos * POS_TO_ANGLE;
-	  motor->para.vel = uint_to_float(motor->para.v_int, V_MIN, V_MAX, 12); // 
-	  motor->para.tor = uint_to_float(motor->para.t_int, T_MIN, T_MAX, 12);  // 
-	  motor->para.Tmos = (float)(rx_data[6]);
-	  motor->para.Tcoil = (float)(rx_data[7]);
-		motor->para.totalpos += motor->para.pos - motor->para.lastpos;
-		motor->para.lastpos = motor->para.pos;
-	}
+    if (data_len == FDCAN_DLC_BYTES_8)
+    {
+        motor->para.id    = (rx_data[0]) & 0x0F;
+        motor->para.state = (rx_data[0]) >> 4;
+        motor->para.p_int = (rx_data[1]<<8) | rx_data[2];
+        motor->para.v_int = (rx_data[3]<<4)|(rx_data[4]>>4);
+        motor->para.t_int = ((rx_data[4]&0xF)<<8)|rx_data[5];
+        // ① MIT 内部坐标：p_m（映射位置）
+        motor->para.pos_m = uint_to_float(motor->para.p_int, P_MIN, P_MAX, 16);
+        motor->para.vel   = uint_to_float(motor->para.v_int, V_MIN, V_MAX, 12);
+        motor->para.tor   = uint_to_float(motor->para.t_int, T_MIN, T_MAX, 12);
+
+        motor->para.Tmos  = (float)(rx_data[6]);
+        motor->para.Tcoil = (float)(rx_data[7]);
+
+        // ② 如果已经完成 offset 标定，则对外位置 = 绝对位置 xout
+        if (motor->para.offset_inited){
+            motor->para.pos = motor->para.xout;
+        }
+        else{
+            // 启动早期还没有 xout / offset，就先用 p_m 顶一下
+            motor->para.pos = motor->para.pos_m;
+        }
+
+        motor->para.totalpos += motor->para.pos - motor->para.lastpos;
+        motor->para.lastpos   = motor->para.pos;
+    }
+}
+
+void dm_read_xout(FDCAN_HandleTypeDef *hcan, uint16_t motor_id)
+{
+    uint8_t data[4];
+
+    data[0] = motor_id & 0xFF;       // CANID_L
+    data[1] = (motor_id >> 8) & 0xFF; // CANID_H
+    data[2] = 0x33;                  // read command
+    data[3] = 0x51;                  // RID = xout
+
+    canx_send_data(hcan, 0x7FF, data, 4);
 }
 
 void enable_motor_mode(hcan_t* hcan, uint16_t motor_id, uint16_t mode_id)
@@ -144,6 +169,18 @@ void disable_motor_mode(hcan_t* hcan, uint16_t motor_id, uint16_t mode_id)
 * @details:    	通过CAN总线向电机发送MIT模式下的控制帧。
 ************************************************************************
 **/
+static float dm_abs_to_mit_pos(Joint_Motor_t *m, float x_abs)
+{
+    float p_des = x_abs + m->para.pos_offset;  // 带上 offset，转到 p_m 坐标系
+
+    // 选做：如果超过 PMAX 映射范围，可以做一下 wrap
+    const float span = (P_MAX - P_MIN);  // 一般 P_MIN = -PMAX, P_MAX = +PMAX
+    while (p_des > P_MAX) p_des -= span;
+    while (p_des < P_MIN) p_des += span;
+
+    return p_des;
+}
+
 void mit_ctrl(hcan_t* hcan, uint16_t motor_id, dm_motor_info_t *dm_info)//float pos, float vel,float kp, float kd, float torq
 {
 	uint8_t data[8];
@@ -165,6 +202,33 @@ void mit_ctrl(hcan_t* hcan, uint16_t motor_id, dm_motor_info_t *dm_info)//float 
 	data[7] = tor_tmp;
 	
 	canx_send_data(hcan, id, data, 8);
+}
+
+void mit_ctrl_abs(FDCAN_HandleTypeDef *hcan,Joint_Motor_t *m,dm_motor_info_t *info, float x_abs){
+    if (m->para.offset_inited)
+    {
+        float p_des = dm_abs_to_mit_pos(m, x_abs);
+        info->motor_info.pos = p_des;
+    }
+    else
+    {
+        info->motor_info.pos = x_abs;
+    }
+    mit_ctrl(hcan, m->para.id, info);
+}
+//无电流输出
+void mit_free(hcan_t* hcan, Joint_Motor_t *m)
+{		
+    dm_motor_info_t free_cmd;
+
+    free_cmd.con_parameter.Kp = 0.0f;   // 不锁位置
+    free_cmd.con_parameter.Kd = 0.0f;   // 不阻尼
+    free_cmd.con_parameter.Tq = 0.0f;   // 不输出扭矩
+
+    free_cmd.motor_info.pos = 0.0f;     // 这里必须写，不表示位置控制，只是MIT框架要求
+    free_cmd.motor_info.vel = 0.0f;
+		
+    mit_ctrl(hcan, m->para.id, &free_cmd);
 }
 /**
 ************************************************************************
@@ -225,6 +289,11 @@ void speed_ctrl(hcan_t* hcan,uint16_t motor_id, float vel)
 	canx_send_data(hcan, id, data, 4);
 }
 
-
+void dm_save_zero(FDCAN_HandleTypeDef *hcan, uint16_t id)
+{
+    uint8_t data[8] = {0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFE};
+    canx_send_data(hcan, id + MIT_MODE, data, 8);
+    HAL_Delay(50);
+}
 
 
