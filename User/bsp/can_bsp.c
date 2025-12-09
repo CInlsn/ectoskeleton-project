@@ -16,10 +16,10 @@ void FDCAN1_Config(void)
   /* Configure Rx filter */	
 	sFilterConfig.IdType = FDCAN_STANDARD_ID;//标准ID，扩展ID不接收
   sFilterConfig.FilterIndex = 0;
-  sFilterConfig.FilterType = FDCAN_FILTER_MASK;
+  sFilterConfig.FilterType = FDCAN_FILTER_RANGE;
   sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO0;
-  sFilterConfig.FilterID1 = 0x00000000; // 
-  sFilterConfig.FilterID2 = 0x00000000; // 
+  sFilterConfig.FilterID1 = 0; // 
+  sFilterConfig.FilterID2 = 15; // 
   if(HAL_FDCAN_ConfigFilter(&hfdcan1, &sFilterConfig) != HAL_OK)
 	{
 		Error_Handler();
@@ -55,10 +55,10 @@ void FDCAN2_Config(void)
   /* Configure Rx filter */
   sFilterConfig.IdType =  FDCAN_STANDARD_ID;
   sFilterConfig.FilterIndex = 1;
-  sFilterConfig.FilterType = FDCAN_FILTER_MASK;
+  sFilterConfig.FilterType = FDCAN_FILTER_RANGE;
   sFilterConfig.FilterConfig = FDCAN_FILTER_TO_RXFIFO1;
-  sFilterConfig.FilterID1 = 0x00000000;
-  sFilterConfig.FilterID2 = 0x00000000;
+  sFilterConfig.FilterID1 = 0;
+  sFilterConfig.FilterID2 = 15;
   if (HAL_FDCAN_ConfigFilter(&hfdcan2, &sFilterConfig) != HAL_OK)
   {
     Error_Handler();
@@ -136,59 +136,61 @@ uint8_t canx_send_data(FDCAN_HandleTypeDef *hcan, uint16_t id, uint8_t *data, ui
 
 
 extern Joint_Motor_t motor[15];
+int a1 =0;
 int a2 =0;
 void HAL_FDCAN_RxFifo0Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo0ITs)
-{ 
-  if((RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) != RESET)
-  {
-    if(hfdcan->Instance == FDCAN1)
-    {
-      /* Retrieve Rx messages from RX FIFO0 */
-			memset(g_Can1RxData, 0, sizeof(g_Can1RxData));	//接收前先清空数组	
-      HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader1, g_Can1RxData);
-			uint16_t idx = RxHeader1.Identifier;
-			if (g_Can1RxData[2] == 0x33 && g_Can1RxData[3] == 0x51){
-        float xout;
-        memcpy(&xout, &g_Can1RxData[4], 4);
-        motor[idx].para.xout = xout;
-        if (!motor[idx].para.offset_inited && motor[idx].para.pos_m != 0.0f){
-            motor[idx].para.pos_offset   = motor[idx].para.pos_m - motor[idx].para.xout;
-            motor[idx].para.offset_inited = 1;
+{
+    if ((RxFifo0ITs & FDCAN_IT_RX_FIFO0_NEW_MESSAGE) == RESET) return;
+
+    HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO0, &RxHeader1, g_Can1RxData);
+
+    uint8_t *d = g_Can1RxData;
+
+    // XOUT 帧
+    if (d[2] == 0x33 && d[3] == 0x51){
+        uint16_t motor_id = d[0] | (d[1] << 8);
+        if (motor_id < 15){
+            float xout;
+            memcpy(&xout, &d[4], 4);
+            motor[motor_id].para.xout = xout;
         }
-      }
-      else{// ---- 情况 2：正常反馈帧（MIT） ----
-        dm_fbdata(&motor[idx], g_Can1RxData, RxHeader1.DataLength);
-      }
-			a2++;
-	  }
-  }
+        return;
+    }
+
+    uint8_t motor_id =  motor_id = d[0] & 0x0F;  // 文档定义 D1 低8位 = ID
+		if (motor_id < 15){
+      dm_fbdata(&motor[motor_id], d, RxHeader1.DataLength);
+    }
+		a1++;
 }
 
 void HAL_FDCAN_RxFifo1Callback(FDCAN_HandleTypeDef *hfdcan, uint32_t RxFifo1ITs)
 {
-  if((RxFifo1ITs & FDCAN_IT_RX_FIFO1_NEW_MESSAGE) != RESET)
-  {
-    if(hfdcan->Instance == FDCAN2)
-    {
-      /* Retrieve Rx messages from RX FIFO0 */
-			memset(g_Can2RxData, 0, sizeof(g_Can2RxData));
-      HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO1, &RxHeader2, g_Can2RxData);
-			uint16_t idx = RxHeader2.Identifier;
-			if (g_Can2RxData[2] == 0x33 && g_Can2RxData[3] == 0x51){
-        float xout;
-        memcpy(&xout, &g_Can2RxData[4], 4);
-        motor[idx].para.xout = xout;
-// 如果此时已经有 p_m，则可以算 offset
-        if (!motor[idx].para.offset_inited && motor[idx].para.pos_m != 0.0f){
-            motor[idx].para.pos_offset   = motor[idx].para.pos_m - motor[idx].para.xout;
-            motor[idx].para.offset_inited = 1;
+	if ((RxFifo1ITs & FDCAN_IT_RX_FIFO1_NEW_MESSAGE) == RESET) return;
+
+    HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_FIFO1, &RxHeader2, g_Can2RxData);
+
+    uint8_t *d = g_Can2RxData;
+
+    // XOUT 帧
+    if (d[2] == 0x33 && d[3] == 0x51){
+        uint16_t motor_id = d[0] | (d[1] << 8);
+        if (motor_id < 15){
+            float xout;
+            memcpy(&xout, &d[4], 4);
+            motor[motor_id].para.xout = xout;
         }
-      }
-      else{// ---- 情况 2：正常反馈帧（MIT） ----
-        dm_fbdata(&motor[idx], g_Can2RxData, RxHeader2.DataLength);
-      }
+        return;
     }
-  }
+
+    uint8_t motor_id = d[0] & 0x0F; // 文档定义 D1 低8位 = ID
+    if (motor_id < 15){
+			if (RxHeader2.DataLength != FDCAN_DLC_BYTES_8){
+				return; // ACK, wrong length, ignore
+			}
+      dm_fbdata(&motor[motor_id], d, RxHeader2.DataLength);
+    }
+		a2++;
 }
 
 

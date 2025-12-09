@@ -135,15 +135,9 @@ int main(void)
 	FDCAN1_Config();
 	FDCAN2_Config();
 	
-	//joint_motor_init(&motor,1,MIT_MODE);//��ʼ��������������IDΪ1��MITģʽ
-	//joint_motor_init(&motor,5,MIT_MODE);
 	HAL_Delay(100);
 
-	for(int i=0;i<20;i++)
-	{
-	 //enable_motor_mode(&hfdcan1, motor.para.id, MIT_MODE);//ʹ�ܵ��
-	 HAL_Delay(20);
-	}
+
 	HAL_TIM_Base_Start_IT(&htim2);
   /* USER CODE END 2 */
 
@@ -161,9 +155,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   { 		
-		//mit_ctrl(&hfdcan1, motor.para.id, 0.0f, 1.0f,20.0f, 0.3f,1.0f);//MITģʽ��������
-		//speed_ctrl(&hfdcan1,motor.para.id, 1.5f);//�ٶ�ģʽ�����ٶ�
-		//pos_speed_ctrl(&hfdcan1,motor.para.id, 6.28f, 2.0f);
+
 		HAL_Delay(2);
     /* USER CODE END WHILE */
 

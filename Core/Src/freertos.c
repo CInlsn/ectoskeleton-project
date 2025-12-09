@@ -130,8 +130,8 @@ void MX_FREERTOS_Init(void) {
 
   /* USER CODE BEGIN RTOS_THREADS */
 	main_control_Handle = osThreadNew(mainTask, NULL, &main_control_attributes);
-	xout_can1_Handle = osThreadNew(XoutTask_CAN1, NULL, &xout_can1_attributes);
-	xout_can2_Handle = osThreadNew(XoutTask_CAN2, NULL, &xout_can2_attributes);
+//	xout_can1_Handle = osThreadNew(XoutTask_CAN1, NULL, &xout_can1_attributes);
+//	xout_can2_Handle = osThreadNew(XoutTask_CAN2, NULL, &xout_can2_attributes);
 	controllerHandle = osThreadNew(controller_Handle, NULL, &controller_attributes);
 	imuHandle = osThreadNew(imu_Task, NULL, &imu_attributes);
   /* add threads, ... */

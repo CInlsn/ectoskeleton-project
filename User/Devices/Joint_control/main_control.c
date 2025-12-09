@@ -9,6 +9,13 @@ dm_motor_info_t dm_motor_info[16] = {0};
 main_control_t main_control;
 int calf_flag;
 
+extern osThreadId_t xout_can1_Handle;
+extern osThreadId_t xout_can2_Handle;
+extern osThreadAttr_t xout_can1_attributes;
+extern osThreadAttr_t xout_can2_attributes;
+
+int xout_task_started = 0;
+
 void val_limit(float *val,float min,float max){
 	if(*val <= min){
 		*val = min;
@@ -124,17 +131,33 @@ void mode_active(){
       mit_free(&hfdcan1, &motor[3]);
 			mit_free(&hfdcan2, &motor[5]);
 			mit_free(&hfdcan2, &motor[7]);
+			mit_free(&hfdcan1, &motor[9]);
 		}
 		else if (main_control.control_mode == UP_PART){
+
 			if (main_control.body_mode == WAIST ){
-			mit_free(&hfdcan1, &motor[1]);
-      mit_free(&hfdcan1, &motor[3]);
-			mit_free(&hfdcan2, &motor[5]);
+				main_control.pos_set[9].xouttemp_set = main_control.pos_set[9].last_xout + 0.02f * controller.channel[1];
+				val_limit(&main_control.pos_set[9].xouttemp_set,KNEE_MIN ,KNEE_MAX);
+				main_control.pos_set[9].last_xout = main_control.pos_set[9].xouttemp_set;
+				mit_ctrl_abs(&hfdcan1, &motor[9], &dm_motor_info[9],main_control.pos_set[9].xouttemp_set);
+				
+				mit_free(&hfdcan1, &motor[1]);
+				mit_free(&hfdcan1, &motor[3]);
+				mit_free(&hfdcan2, &motor[5]);
+				mit_free(&hfdcan2, &motor[7]);
 			}
 			else if (main_control.body_mode == HIP){
-			mit_free(&hfdcan1, &motor[1]);
-      mit_free(&hfdcan1, &motor[3]);
-			mit_free(&hfdcan2, &motor[5]);
+				main_control.pos_set[7].xouttemp_set = main_control.pos_set[7].last_xout + 0.02f * controller.channel[0];
+				
+				val_limit(&main_control.pos_set[7].xouttemp_set,KNEE_MIN ,KNEE_MAX);
+				
+				main_control.pos_set[7].last_xout = main_control.pos_set[7].xouttemp_set;
+				
+				mit_ctrl_abs(&hfdcan2, &motor[7], &dm_motor_info[7],main_control.pos_set[7].xouttemp_set);
+				mit_free(&hfdcan1, &motor[1]);
+				mit_free(&hfdcan1, &motor[3]);
+				mit_free(&hfdcan2, &motor[5]);
+				mit_free(&hfdcan1, &motor[9]);
 			}
 		}
 		else if (main_control.control_mode == LOW_PART){
@@ -148,7 +171,8 @@ void mode_active(){
 				mit_ctrl_abs(&hfdcan2, &motor[5], &dm_motor_info[5],main_control.pos_set[5].xouttemp_set);
 				mit_free(&hfdcan1, &motor[1]);
 				mit_free(&hfdcan1, &motor[3]);
-
+				mit_free(&hfdcan2, &motor[7]);
+				mit_free(&hfdcan1, &motor[9]);
 			}
 			else if (main_control.body_mode == CALF){
 				int tmp_flag = 1;
@@ -169,11 +193,16 @@ void mode_active(){
 				mit_ctrl_abs(&hfdcan1, &motor[1], &dm_motor_info[1],main_control.pos_set[1].xouttemp_set);
 				mit_ctrl_abs(&hfdcan1, &motor[3], &dm_motor_info[3],main_control.pos_set[3].xouttemp_set);
 				mit_free(&hfdcan2, &motor[5]);
+				mit_free(&hfdcan1, &motor[7]);
+				mit_free(&hfdcan1, &motor[9]);
 			}
 		}
 		else{
 			mit_free(&hfdcan1, &motor[1]);
       mit_free(&hfdcan1, &motor[3]);
+			mit_free(&hfdcan2, &motor[5]);
+			mit_free(&hfdcan1, &motor[9]);
+			mit_free(&hfdcan2, &motor[7]);
 		}
 }
 
@@ -195,54 +224,84 @@ void motor_info_init(){
 		dm_motor_info[5].con_parameter.Tq =0;
 		dm_motor_info[5].motor_info.pos = 0;
 		dm_motor_info[5].motor_info.vel = 0;
+	
+		dm_motor_info[7].con_parameter.Kd =12;
+		dm_motor_info[7].con_parameter.Kp =25;
+		dm_motor_info[7].con_parameter.Tq =0;
+		dm_motor_info[7].motor_info.pos = 0;
+		dm_motor_info[7].motor_info.vel = 0;
+		
+		dm_motor_info[9].con_parameter.Kd =12;
+		dm_motor_info[9].con_parameter.Kp =25;
+		dm_motor_info[9].con_parameter.Tq =0;
+		dm_motor_info[9].motor_info.pos = 0;
+		dm_motor_info[9].motor_info.vel = 0;
 		
 		main_control.pos_set[1].last_xout = ROD_LINIT;
 		main_control.pos_set[3].last_xout = ROD_RINIT;
 		main_control.pos_set[5].last_xout = KNEE_INIT;
+		main_control.pos_set[7].last_xout = HIP_INIT;
+		main_control.pos_set[9].last_xout = WAIST_INIT;
 }
 
 void motor_enable(){
-	if(motor[1].para.state ==0){
-			enable_motor_mode(&hfdcan1,motor[1].para.id,MIT_MODE);
-	}
-	if(motor[3].para.state ==0){
-			enable_motor_mode(&hfdcan1,motor[3].para.id,MIT_MODE);
-	}
-	if(motor[5].para.state ==0){
-			enable_motor_mode(&hfdcan2,motor[5].para.id,MIT_MODE);
-	}
-//	if(motor[7].para.state ==0){
-//			enable_motor_mode(&hfdcan2,motor[7].para.id,MIT_MODE);
-//	}
+//    static int enabled = 0;
+//    if(enabled) return;
+
+    if(motor[1].para.state ==0){
+        enable_motor_mode(&hfdcan1,motor[1].para.id,MIT_MODE);
+		osDelay (5);
+		}
+    if(motor[3].para.state ==0){
+        enable_motor_mode(&hfdcan1,motor[3].para.id,MIT_MODE);
+		osDelay (5);
+		}
+    if(motor[5].para.state ==0){
+        enable_motor_mode(&hfdcan2,motor[5].para.id,MIT_MODE);
+		osDelay (5);
+		}
+    if(motor[7].para.state ==0){
+        enable_motor_mode(&hfdcan2,motor[7].para.id,MIT_MODE);
+		osDelay (5);
+		}
+		if(motor[9].para.state ==0){
+        enable_motor_mode(&hfdcan1,motor[9].para.id,MIT_MODE);
+		osDelay (5);
+		}
+//    enabled = 1;
 }
 void mainTask(void *argument){
 	for(int i = 0; i< 15;i+=1){
 		joint_motor_init(&motor[i],i,MIT_MODE);
 	}
 	motor_info_init();
+	motor_enable();
+  if(!xout_task_started){
+    xout_can1_Handle = osThreadNew(XoutTask_CAN1, NULL, &xout_can1_attributes);
+    xout_can2_Handle = osThreadNew(XoutTask_CAN2, NULL, &xout_can2_attributes);
+    xout_task_started = 1;
+  }
 	while(1){
-		motor_enable();
 /*    当你认为零点位置不对时，请用以下代码重设零点*/
 //		dm_save_zero(&hfdcan1, 1);
 //		dm_save_zero(&hfdcan1, 3);
-//		dm_save_zero(&hfdcan1, 5);
+//		dm_save_zero(&hfdcan2, 5);
+//		dm_save_zero(&hfdcan2, 7);
+//		dm_save_zero(&hfdcan1, 9);
+		motor_enable();
 		mode_switch();
 		if(motor_flag == 0){
 			main_control.control_mode = STOP;
-//			mit_free(&hfdcan1, &motor[1]);
-//      mit_free(&hfdcan1, &motor[3]);
-//			mit_free(&hfdcan2, &motor[5]);
-//			mit_free(&hfdcan2, &motor[7]);
 		}
 
 		mode_active();
-		osDelay(1);
+		osDelay(2);
 	}
 }
 
 void XoutTask_CAN1(void *argument)
 {
-    const uint16_t ids[] = {1, 3};
+    const uint16_t ids[] = {1, 3 , 9};
     const uint8_t num_ids = sizeof(ids)/sizeof(ids[0]);
     uint8_t idx = 0;
 

@@ -28,5 +28,13 @@ typedef struct {
 #define KNEE_INIT 0
 #define KNEE_MAX 0.5f
 #define KNEE_MIN -0.5f
+
+#define HIP_INIT 0
+#define HIP_MAX 0.5f
+#define HIP_MIN -0.5f
+
+#define WAIST_INIT 0
+#define WAIST_MAX 0.5f
+#define WAIST_MIN -0.5f
 #endif
 
