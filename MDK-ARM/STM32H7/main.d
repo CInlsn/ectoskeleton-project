@@ -63,11 +63,15 @@ stm32h7\main.o: ../Core/Inc/octospi.h
 stm32h7\main.o: ../Core/Inc/spi.h
 stm32h7\main.o: ../Core/Inc/tim.h
 stm32h7\main.o: ../Core/Inc/usart.h
-stm32h7\main.o: ../Core/Inc/usb_otg.h
+stm32h7\main.o: ../USB_DEVICE/App/usb_device.h
+stm32h7\main.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
+stm32h7\main.o: ../USB_DEVICE/Target/usbd_conf.h
+stm32h7\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdio.h
+stm32h7\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32h7\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
 stm32h7\main.o: ../Core/Inc/gpio.h
 stm32h7\main.o: ../User/bsp/can_bsp.h
 stm32h7\main.o: ../User/Devices/DM_Motor/dm_drv.h
 stm32h7\main.o: ../User/Devices/Joint_control/dm_info.h
 stm32h7\main.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
-stm32h7\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
 stm32h7\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\float.h

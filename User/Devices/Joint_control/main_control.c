@@ -207,26 +207,26 @@ void mode_active(){
 }
 
 void motor_info_init(){		
-		dm_motor_info[1].con_parameter.Kd =8;
-		dm_motor_info[1].con_parameter.Kp =25;
+		dm_motor_info[1].con_parameter.Kd =16;
+		dm_motor_info[1].con_parameter.Kp =28;
 		dm_motor_info[1].con_parameter.Tq =0;
 		dm_motor_info[1].motor_info.pos = 0;
 		dm_motor_info[1].motor_info.vel = 0;
 	
-		dm_motor_info[3].con_parameter.Kd =8;
-		dm_motor_info[3].con_parameter.Kp =25;
+		dm_motor_info[3].con_parameter.Kd =16;
+		dm_motor_info[3].con_parameter.Kp =28;
 		dm_motor_info[3].con_parameter.Tq =0;
 		dm_motor_info[3].motor_info.pos = 0;
 		dm_motor_info[3].motor_info.vel = 0;
 	
-		dm_motor_info[5].con_parameter.Kd =8;
-		dm_motor_info[5].con_parameter.Kp =25;
+		dm_motor_info[5].con_parameter.Kd =16;
+		dm_motor_info[5].con_parameter.Kp =30;
 		dm_motor_info[5].con_parameter.Tq =0;
 		dm_motor_info[5].motor_info.pos = 0;
 		dm_motor_info[5].motor_info.vel = 0;
 	
-		dm_motor_info[7].con_parameter.Kd =12;
-		dm_motor_info[7].con_parameter.Kp =25;
+		dm_motor_info[7].con_parameter.Kd =16;
+		dm_motor_info[7].con_parameter.Kp =30;
 		dm_motor_info[7].con_parameter.Tq =0;
 		dm_motor_info[7].motor_info.pos = 0;
 		dm_motor_info[7].motor_info.vel = 0;
@@ -282,19 +282,33 @@ void mainTask(void *argument){
     xout_task_started = 1;
   }
 	while(1){
-/*    当你认为零点位置不对时，请用以下代码重设零点*/
+///*    当你认为零点位置不对时，请用以下代码重设零点*/
 //		dm_save_zero(&hfdcan1, 1);
 //		dm_save_zero(&hfdcan1, 3);
 //		dm_save_zero(&hfdcan2, 5);
 //		dm_save_zero(&hfdcan2, 7);
 //		dm_save_zero(&hfdcan1, 9);
 		motor_enable();
-		mode_switch();
-		if(motor_flag == 0){
-			main_control.control_mode = STOP;
+//		mode_switch();
+//		if(motor_flag == 0){
+//			main_control.control_mode = STOP;
+//		}
+//		
+//		mode_active();
+		if(motor_flag ==1){
+			mit_ctrl_abs(&hfdcan1, &motor[1], &dm_motor_info[1],ROD_LINIT);
+			mit_ctrl_abs(&hfdcan1, &motor[3], &dm_motor_info[3],ROD_RINIT);
+			mit_ctrl_abs(&hfdcan2, &motor[5], &dm_motor_info[5],KNEE_INIT);
+			mit_ctrl_abs(&hfdcan2, &motor[7], &dm_motor_info[7],HIP_INIT);
+			mit_ctrl_abs(&hfdcan1, &motor[9], &dm_motor_info[9],HIP_INIT);
 		}
-
-		mode_active();
+		else{
+				mit_free(&hfdcan1, &motor[1]);
+				mit_free(&hfdcan1, &motor[3]);
+				mit_free(&hfdcan2, &motor[5]);
+				mit_free(&hfdcan1, &motor[7]);
+				mit_free(&hfdcan1, &motor[9]);
+		}
 		osDelay(2);
 	}
 }

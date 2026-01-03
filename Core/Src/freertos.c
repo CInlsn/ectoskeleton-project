@@ -28,6 +28,7 @@
 #include "main_control.h"
 #include "controller.h"
 #include "imu.h"
+#include "board_com.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -86,6 +87,12 @@ const osThreadAttr_t controller_attributes = {
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+osThreadId_t comHandle;
+const osThreadAttr_t com_attributes = {
+  .name = "comTask",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 osThreadId_t imuHandle;
 const osThreadAttr_t imu_attributes = {
   .name = "imuTask",
@@ -96,6 +103,7 @@ const osThreadAttr_t imu_attributes = {
 
 void StartDefaultTask(void *argument);
 
+extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
@@ -133,6 +141,7 @@ void MX_FREERTOS_Init(void) {
 //	xout_can1_Handle = osThreadNew(XoutTask_CAN1, NULL, &xout_can1_attributes);
 //	xout_can2_Handle = osThreadNew(XoutTask_CAN2, NULL, &xout_can2_attributes);
 	controllerHandle = osThreadNew(controller_Handle, NULL, &controller_attributes);
+	comHandle = osThreadNew(comTask, NULL, &com_attributes);
 	imuHandle = osThreadNew(imu_Task, NULL, &imu_attributes);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
@@ -152,6 +161,8 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
+  /* init code for USB_DEVICE */
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
   for(;;)

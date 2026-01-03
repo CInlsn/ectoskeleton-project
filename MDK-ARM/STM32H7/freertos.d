@@ -62,3 +62,4 @@ stm32h7\freertos.o: ../User/bsp/can_bsp.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/dm_info.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/controller.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/imu.h
+stm32h7\freertos.o: ../User/Devices/Joint_control/board_com.h
