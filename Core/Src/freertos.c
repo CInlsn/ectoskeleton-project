@@ -79,12 +79,12 @@ const osThreadAttr_t imu_attributes = {
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-osThreadId_t unitree_motorHandle;
-const osThreadAttr_t unitree_motor_attributes = {
-  .name = "unitree_motorTask",
-  .stack_size = 128 * 4,
-  .priority = (osPriority_t) osPriorityNormal,
-};
+//osThreadId_t unitree_motorHandle;
+//const osThreadAttr_t unitree_motor_attributes = {
+//  .name = "unitree_motorTask",
+//  .stack_size = 128 * 4,
+//  .priority = (osPriority_t) osPriorityNormal,
+//};
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
@@ -122,10 +122,10 @@ void MX_FREERTOS_Init(void) {
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
-	//main_control_Handle = osThreadNew(mainTask, NULL, &main_control_attributes);
+	main_control_Handle = osThreadNew(mainTask, NULL, &main_control_attributes);
 	controllerHandle = osThreadNew(controller_Handle, NULL, &controller_attributes);
 	//imuHandle = osThreadNew(imu_Task, NULL, &imu_attributes);
-	unitree_motorHandle = osThreadNew(unitree_motorTask, NULL, &imu_attributes);
+//	unitree_motorHandle = osThreadNew(unitree_motorTask, NULL, &imu_attributes);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 

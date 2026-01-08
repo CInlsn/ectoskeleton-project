@@ -6,6 +6,7 @@
 #include "FreeRTOS.h"
 #include "dm_info.h"
 #include "controller.h"
+#include "unitree_motor.h"
 
 typedef enum {
 	STOP,

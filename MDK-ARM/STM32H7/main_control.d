@@ -60,5 +60,6 @@ stm32h7\main_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/depre
 stm32h7\main_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
 stm32h7\main_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 stm32h7\main_control.o: ..\User\Devices\Joint_control\controller.h
+stm32h7\main_control.o: ../Components/unitree_motor.h
 stm32h7\main_control.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 stm32h7\main_control.o: ..\User\Devices\Joint_control\func_lib.h

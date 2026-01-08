@@ -22,7 +22,7 @@ typedef struct{
 	sw_e SW[5];
 }controller_t;
 extern controller_t controller;
-
+extern uint8_t RxTemp;
 void controller_Reveive(uint8_t data);
 void controller_Handle(void *argument);
 

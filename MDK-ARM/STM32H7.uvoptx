@@ -168,47 +168,52 @@
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>aaa,0x0A</ItemText>
+          <ItemText>controller</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>controller</ItemText>
+          <ItemText>motor_flag,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>motor,0x0A</ItemText>
+          <ItemText>failsafe_status</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>a2,0x0A</ItemText>
+          <ItemText>UnitreeMotors_Status,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>motor_flag,0x0A</ItemText>
+          <ItemText>correct</ItemText>
         </Ww>
         <Ww>
           <count>7</count>
           <WinNumber>1</WinNumber>
-          <ItemText>failsafe_status</ItemText>
+          <ItemText>mistaken</ItemText>
         </Ww>
         <Ww>
           <count>8</count>
           <WinNumber>1</WinNumber>
-          <ItemText>UnitreeMotors_Status</ItemText>
+          <ItemText>aaa1</ItemText>
         </Ww>
         <Ww>
           <count>9</count>
           <WinNumber>1</WinNumber>
-          <ItemText>correct</ItemText>
+          <ItemText>aaa2</ItemText>
         </Ww>
         <Ww>
           <count>10</count>
           <WinNumber>1</WinNumber>
-          <ItemText>mistaken</ItemText>
+          <ItemText>UnitreeMotors_State_SI</ItemText>
+        </Ww>
+        <Ww>
+          <count>11</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>UnitreeMotors_TotalPos</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

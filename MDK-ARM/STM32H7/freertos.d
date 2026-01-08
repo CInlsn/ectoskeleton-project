@@ -63,5 +63,6 @@ stm32h7\freertos.o: ../Core/Inc/fdcan.h
 stm32h7\freertos.o: ../User/bsp/can_bsp.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/dm_info.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/controller.h
-stm32h7\freertos.o: ../User/Devices/Joint_control/imu.h
 stm32h7\freertos.o: ../Components/unitree_motor.h
+stm32h7\freertos.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32h7\freertos.o: ../User/Devices/Joint_control/imu.h

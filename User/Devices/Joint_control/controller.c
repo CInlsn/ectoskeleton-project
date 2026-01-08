@@ -129,9 +129,6 @@ void USART_Init(void)
 //    {		controller_Reveive(RxTemp);
 //        HAL_UART_Receive_IT(&huart5, (uint8_t *)&RxTemp, 1);
 //    }
-//		// need to modify, seems it only wakeup the Thread  --  unitree_motor
-//		if (huart == &huart2){osThreadFlagsSet(unitree_motorHandle, 1);}
-//		//	if (huart == &huart3){osThreadFlagsSet(unitree_thread_bus2, 1);}
 //}
 
 // SBUS receives and processes data handle  SBUS接收处理数据句柄

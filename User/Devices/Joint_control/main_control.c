@@ -5,6 +5,8 @@
 int motor_flag = 0;
 static uint32_t last_tick = 0;
 int calf_flag;
+extern UART_HandleTypeDef huart2;
+extern UART_HandleTypeDef huart3;
 
 void val_limit(float *val,float min,float max){
 	if(*val <= min){
@@ -31,8 +33,26 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 }
 
 void mainTask(void *argument){
-
+	UnitreeMotor_Info_initialize();
+	UnitreeMotor_SetOutputMode(0, UNITREE_MOTOR_ON);
+	UnitreeMotor_SetOutputMode(1, UNITREE_MOTOR_ON);
+	UnitreeMotor_SetOutputMode(2, UNITREE_MOTOR_ON);
+	UnitreeMotor_Homing_All();
 	while(1){
-		osDelay(10);
+		if (motor_flag == 1){		
+		}
+		else{
+			UnitreeMotor_SetVelocity(0, 0,1);
+			UnitreeMotor_SendCommand(0, &huart2);
+			osDelay(1);
+			UnitreeMotor_SetVelocity(1, 0,1);
+			UnitreeMotor_SendCommand(1, &huart2);
+			osDelay(1);
+			UnitreeMotor_SetVelocity(2, 0,1);
+			UnitreeMotor_SendCommand(2, &huart2);			
+			osDelay(3);
+		
+		}
+
 	}
 }
