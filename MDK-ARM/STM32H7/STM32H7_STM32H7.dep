@@ -189,7 +189,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x695CF92E
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/task.h)(0x695CF92E)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/list.h)(0x695CF92E)
 F (startup_stm32h723xx.s)(0x695CF92E)(--cpu Cortex-M7.fp.dp -g --apcs=interwork --pd "__MICROLIB SETA 1" -I ../Core/Inc -I ../Drivers/CMSIS/Include-I.\RTE\_STM32H7-ID:\Keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include--pd "__UVISION_VERSION SETA 536" --pd "_RTE_ SETA 1" --pd "STM32H723xx SETA 1" --pd "_RTE_ SETA 1"--list startup_stm32h723xx.lst --xref -o stm32h7\startup_stm32h723xx.o --depend stm32h7\startup_stm32h723xx.d)
-F (../Core/Src/main.c)(0x695D0C63)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/CMSIS/DSP/Include -I ../User/bsp -I ../User/Devices/DM_Motor -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../User/Devices/Board_Commu -I ../Utils -I ../User/Devices/Joint_control -I ../Components-I.\RTE\_STM32H7-ID:\Keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx-o stm32h7\main.o --omf_browse stm32h7\main.crf --depend stm32h7\main.d)
+F (../Core/Src/main.c)(0x6960DCBA)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/CMSIS/DSP/Include -I ../User/bsp -I ../User/Devices/DM_Motor -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../User/Devices/Board_Commu -I ../Utils -I ../User/Devices/Joint_control -I ../Components-I.\RTE\_STM32H7-ID:\Keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx-o stm32h7\main.o --omf_browse stm32h7\main.crf --depend stm32h7\main.d)
 I (../Core/Inc/main.h)(0x695CF92D)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x695CF92E)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x695CF92D)
@@ -370,13 +370,13 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h)(0x695CF92E)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h)(0x695CF92E)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h)(0x695CF92E)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x695CF92E)
-I (../User/Devices/Joint_control/main_control.h)(0x695D0CA6)
+I (../User/Devices/Joint_control/main_control.h)(0x6964FD73)
 I (../User/Devices/DM_Motor/dm_drv.h)(0x695CF92E)
 I (../Core/Inc/fdcan.h)(0x695CF92D)
 I (../User/bsp/can_bsp.h)(0x695CF92F)
 I (../User/Devices/Joint_control/dm_info.h)(0x695CF92E)
-I (../User/Devices/Joint_control/controller.h)(0x695CF9CB)
-I (../Components/unitree_motor.h)(0x695FA8DB)
+I (../User/Devices/Joint_control/controller.h)(0x6964E4E7)
+I (../Components/unitree_motor.h)(0x6964EA35)
 I (D:\Keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (../User/Devices/Joint_control/imu.h)(0x695CF92F)
 F (../Core/Src/crc.c)(0x695CF92D)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/CMSIS/DSP/Include -I ../User/bsp -I ../User/Devices/DM_Motor -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../User/Devices/Board_Commu -I ../Utils -I ../User/Devices/Joint_control -I ../Components-I.\RTE\_STM32H7-ID:\Keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx-o stm32h7\crc.o --omf_browse stm32h7\crc.crf --depend stm32h7\crc.d)
@@ -2599,7 +2599,7 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h)(0x695CF92E)
 I (D:\Keil\ARM\ARMCC\include\string.h)(0x6025237E)
 F (..\User\Devices\Joint_control\func_lib.h)(0x695CF92E)()
 F (..\User\Devices\Joint_control\controller.c)(0x695CF9CB)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/CMSIS/DSP/Include -I ../User/bsp -I ../User/Devices/DM_Motor -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../User/Devices/Board_Commu -I ../Utils -I ../User/Devices/Joint_control -I ../Components-I.\RTE\_STM32H7-ID:\Keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx-o stm32h7\controller.o --omf_browse stm32h7\controller.crf --depend stm32h7\controller.d)
-I (..\User\Devices\Joint_control\controller.h)(0x695CF9CB)
+I (..\User\Devices\Joint_control\controller.h)(0x6964E4E7)
 I (D:\Keil\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (D:\Keil\ARM\ARMCC\include\string.h)(0x6025237E)
 I (../Core/Inc/usart.h)(0x695CF92D)
@@ -2702,8 +2702,8 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h)(0x695CF92E)
 I (../Components/BMI088_driver.h)(0x695CF92D)
 I (../Components/BMI088Middleware.h)(0x695CF92D)
 F (..\User\Devices\Joint_control\dm_info.h)(0x695CF92E)()
-F (..\User\Devices\Joint_control\main_control.c)(0x695FA876)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/CMSIS/DSP/Include -I ../User/bsp -I ../User/Devices/DM_Motor -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../User/Devices/Board_Commu -I ../Utils -I ../User/Devices/Joint_control -I ../Components-I.\RTE\_STM32H7-ID:\Keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx-o stm32h7\main_control.o --omf_browse stm32h7\main_control.crf --depend stm32h7\main_control.d)
-I (..\User\Devices\Joint_control\main_control.h)(0x695D0CA6)
+F (..\User\Devices\Joint_control\main_control.c)(0x6964F872)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/CMSIS/DSP/Include -I ../User/bsp -I ../User/Devices/DM_Motor -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../User/Devices/Board_Commu -I ../Utils -I ../User/Devices/Joint_control -I ../Components-I.\RTE\_STM32H7-ID:\Keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx-o stm32h7\main_control.o --omf_browse stm32h7\main_control.crf --depend stm32h7\main_control.d)
+I (..\User\Devices\Joint_control\main_control.h)(0x6964FD73)
 I (../User/Devices/DM_Motor/dm_drv.h)(0x695CF92E)
 I (../Core/Inc/main.h)(0x695CF92D)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x695CF92E)
@@ -2762,8 +2762,8 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x695CF92E)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x695CF92E)
 I (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h)(0x695CF92E)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h)(0x695CF92E)
-I (..\User\Devices\Joint_control\controller.h)(0x695CF9CB)
-I (../Components/unitree_motor.h)(0x695FA8DB)
+I (..\User\Devices\Joint_control\controller.h)(0x6964E4E7)
+I (../Components/unitree_motor.h)(0x6964EA35)
 I (D:\Keil\ARM\ARMCC\include\stdlib.h)(0x60252374)
 I (..\User\Devices\Joint_control\func_lib.h)(0x695CF92E)
 F (..\Components\BMI088__driver.c)(0x695CF92D)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/CMSIS/DSP/Include -I ../User/bsp -I ../User/Devices/DM_Motor -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../User/Devices/Board_Commu -I ../Utils -I ../User/Devices/Joint_control -I ../Components-I.\RTE\_STM32H7-ID:\Keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx-o stm32h7\bmi088__driver.o --omf_browse stm32h7\bmi088__driver.crf --depend stm32h7\bmi088__driver.d)
@@ -2879,8 +2879,8 @@ F (..\Components\pid.c)(0x695CF92D)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MIC
 I (..\Components\pid.h)(0x695CF92D)
 I (D:\Keil\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (D:\Keil\ARM\ARMCC\include\math.h)(0x60252378)
-F (..\Components\unitree_motor.c)(0x695FA85E)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/CMSIS/DSP/Include -I ../User/bsp -I ../User/Devices/DM_Motor -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../User/Devices/Board_Commu -I ../Utils -I ../User/Devices/Joint_control -I ../Components-I.\RTE\_STM32H7-ID:\Keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx-o stm32h7\unitree_motor.o --omf_browse stm32h7\unitree_motor.crf --depend stm32h7\unitree_motor.d)
-I (..\Components\unitree_motor.h)(0x695FA8DB)
+F (..\Components\unitree_motor.c)(0x6964E92B)(--c99 --gnu -c --cpu Cortex-M7.fp.dp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Core/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc -I ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy -I ../Drivers/CMSIS/Device/ST/STM32H7xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/CMSIS/DSP/Include -I ../User/bsp -I ../User/Devices/DM_Motor -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../User/Devices/Board_Commu -I ../Utils -I ../User/Devices/Joint_control -I ../Components-I.\RTE\_STM32H7-ID:\Keil\ARM\CMSIS\5.8.0\CMSIS\Core\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32H723xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32H723xx-o stm32h7\unitree_motor.o --omf_browse stm32h7\unitree_motor.crf --depend stm32h7\unitree_motor.d)
+I (..\Components\unitree_motor.h)(0x6964EA35)
 I (../Core/Inc/main.h)(0x695CF92D)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h)(0x695CF92E)
 I (../Core/Inc/stm32h7xx_hal_conf.h)(0x695CF92D)
@@ -2928,5 +2928,5 @@ I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd.h)(0x695CF92E)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_ll_usb.h)(0x695CF92E)
 I (../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.h)(0x695CF92E)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x695CF92E)
-I (../User/Devices/Joint_control/controller.h)(0x695CF9CB)
+I (../User/Devices/Joint_control/controller.h)(0x6964E4E7)
 I (D:\Keil\ARM\ARMCC\include\stdlib.h)(0x60252374)

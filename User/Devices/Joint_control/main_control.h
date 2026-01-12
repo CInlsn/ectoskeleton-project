@@ -8,33 +8,28 @@
 #include "controller.h"
 #include "unitree_motor.h"
 
+#define PITCH_RATIO 0.001f
+#define ROLL_RATIO 0.0005f
+#define UP_LIM1 0.5f
+#define LOW_LIM1 -0.1f
+#define UP_LIM2 0.1f
+#define LOW_LIM2 -0.5f
 typedef enum {
-	STOP,
-	UP_PART,
-	LOW_PART,
-}control_mode_e;
+    EMPTY = 0,
+    TOE_MODE,
+    CALF_MODE,
+} control_mode_e;
 
-typedef enum{
-	WAIST,
-	HIP,
-	KNEE,
-	CALF,
-	EMPTY,
-}body_mode_e;
+typedef struct{
+	float kp;
+	float kd;
+}motor_pd_t;
 
 typedef struct{
 	float postemp_set;
 	float last_pos;
 }pos_set_t;
 
-typedef struct{
-	control_mode_e control_mode;
-	body_mode_e body_mode;
-	pos_set_t pos_set[10];
-}main_control_t;
-
-extern dm_motor_info_t dm_motor_info[16];
-extern main_control_t main_control;
-
+extern control_mode_e control_mode;
 void mainTask(void *argument);
 #endif

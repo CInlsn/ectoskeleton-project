@@ -7,10 +7,10 @@
 #include <stdlib.h>
 
 #define UNITREE_HEADER_IDENTIFIER 0xEEFE
-#define HOMING_VEL0           1.5   
-#define HOMING_VEL1						-1.5
-#define HOMING_VEL2						1.5
-#define HOMING_KD             4
+#define HOMING_VEL0           1   
+#define HOMING_VEL1						-1
+#define HOMING_VEL2						1
+#define HOMING_KD             4000
 
 #define HOMING_STABLE_CNT   5
 
@@ -128,6 +128,7 @@ typedef struct {
 extern UnitreeMotor_State_SI_t UnitreeMotors_State_SI[4];
 extern uint8_t motor_comm_index;
 extern float UnitreeMotors_TotalPos[3];
+extern float motor_zero_offset_rad[3];
 extern UnitreeMotor_Info_t UnitreeMotors_Info[4];
 
 void unitree_motorTask(void *argument);

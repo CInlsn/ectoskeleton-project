@@ -22,7 +22,7 @@ uint8_t rxBuffer3[120];
 //check for recieve
 uint32_t recv_crc ;
 
-int16_t homing_vel[3]={HOMING_VEL0,HOMING_VEL1,HOMING_VEL2};
+float homing_vel[3]={HOMING_VEL0,HOMING_VEL1,HOMING_VEL2};
 float motor_zero_offset_rad[3] = {0};
 float UnitreeMotors_TotalPos[3] = {0};
 uint8_t homing_done[3] = {0};
@@ -194,8 +194,8 @@ void UnitreeMotor_SetPosition(uint8_t motor,float pos_out_rad,float kp,float kd)
     UnitreeMotors_Command[motor].MasterComdV3.t_torque = 0;
     UnitreeMotors_Command[motor].MasterComdV3.w_speed  = 0;
     UnitreeMotors_Command[motor].MasterComdV3.pos      = Pos_cmd;
-    UnitreeMotors_Command[motor].MasterComdV3.kP = (uint16_t)(kp * 2048.0f);
-    UnitreeMotors_Command[motor].MasterComdV3.kW = (uint16_t)(kd * 1024.0f);
+    UnitreeMotors_Command[motor].MasterComdV3.kP = (uint16_t)(kp );
+    UnitreeMotors_Command[motor].MasterComdV3.kW = (uint16_t)(kd );
 }
 
 void UnitreeMotor_SetVelocity(uint8_t motor, float vel_out_rad_s, float kd)
@@ -220,7 +220,7 @@ void UnitreeMotor_SetVelocity(uint8_t motor, float vel_out_rad_s, float kd)
     UnitreeMotors_Command[motor].MasterComdV3.w_speed  = W_cmd;
     UnitreeMotors_Command[motor].MasterComdV3.pos      = 0;
     UnitreeMotors_Command[motor].MasterComdV3.kP = 0;
-    UnitreeMotors_Command[motor].MasterComdV3.kW = (uint16_t)(kd * 1024.0f);
+    UnitreeMotors_Command[motor].MasterComdV3.kW = (uint16_t)(kd);
 }
 
 void UnitreeMotor_SetMixed(uint8_t motor,float tau_out_nm,float vel_out_rad_s,float pos_out_rad,float kp,float kd){
@@ -244,8 +244,8 @@ void UnitreeMotor_SetMixed(uint8_t motor,float tau_out_nm,float vel_out_rad_s,fl
     UnitreeMotors_Command[motor].MasterComdV3.t_torque = T_cmd;
     UnitreeMotors_Command[motor].MasterComdV3.w_speed  = W_cmd;
     UnitreeMotors_Command[motor].MasterComdV3.pos      = P_cmd;
-    UnitreeMotors_Command[motor].MasterComdV3.kP = (uint16_t)(kp * 2048.0f);
-    UnitreeMotors_Command[motor].MasterComdV3.kW = (uint16_t)(kd * 1024.0f);
+    UnitreeMotors_Command[motor].MasterComdV3.kP = (uint16_t)(kp);
+    UnitreeMotors_Command[motor].MasterComdV3.kW = (uint16_t)(kd);
 }
 
 void UnitreeMotor_Homing_All(void)
