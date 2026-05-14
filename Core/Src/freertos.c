@@ -73,22 +73,32 @@ const osThreadAttr_t controller_attributes = {
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+
 osThreadId_t imuHandle;
 const osThreadAttr_t imu_attributes = {
   .name = "imuTask",
   .stack_size = 128 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
-//osThreadId_t unitree_motorHandle;
-//const osThreadAttr_t unitree_motor_attributes = {
-//  .name = "unitree_motorTask",
-//  .stack_size = 128 * 4,
-//  .priority = (osPriority_t) osPriorityNormal,
-//};
+
+osThreadId_t unitree_usart2Handle;
+const osThreadAttr_t unitree_usart2_attributes = {
+  .name = "unitree_usart2Task",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+osThreadId_t unitree_usart3Handle;
+const osThreadAttr_t unitree_usart3_attributes = {
+  .name = "unitree_usart3Task",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
 /* USER CODE END FunctionPrototypes */
 
 void StartDefaultTask(void *argument);
 
+extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
@@ -125,7 +135,8 @@ void MX_FREERTOS_Init(void) {
 	main_control_Handle = osThreadNew(mainTask, NULL, &main_control_attributes);
 	controllerHandle = osThreadNew(controller_Handle, NULL, &controller_attributes);
 	//imuHandle = osThreadNew(imu_Task, NULL, &imu_attributes);
-//	unitree_motorHandle = osThreadNew(unitree_motorTask, NULL, &imu_attributes);
+	unitree_usart2Handle = osThreadNew(unitree_motor_uart2Task, NULL, &unitree_usart2_attributes);
+	unitree_usart3Handle = osThreadNew(unitree_motor_uart3Task, NULL, &unitree_usart3_attributes);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 
@@ -144,6 +155,8 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartDefaultTask */
 void StartDefaultTask(void *argument)
 {
+  /* init code for USB_DEVICE */
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN StartDefaultTask */
   /* Infinite loop */
   for(;;)

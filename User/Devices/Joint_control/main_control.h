@@ -8,11 +8,11 @@
 #include "controller.h"
 #include "unitree_motor.h"
 
-#define PITCH_RATIO 0.001f
+#define PITCH_RATIO 0.005f
 #define ROLL_RATIO 0.0005f
 #define UP_LIM1 0.5f
-#define LOW_LIM1 -0.1f
-#define UP_LIM2 0.1f
+#define LOW_LIM1 0
+#define UP_LIM2 0
 #define LOW_LIM2 -0.5f
 typedef enum {
     EMPTY = 0,

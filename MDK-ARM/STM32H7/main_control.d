@@ -63,3 +63,4 @@ stm32h7\main_control.o: ..\User\Devices\Joint_control\controller.h
 stm32h7\main_control.o: ../Components/unitree_motor.h
 stm32h7\main_control.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
 stm32h7\main_control.o: ..\User\Devices\Joint_control\func_lib.h
+stm32h7\main_control.o: ../Components/pid.h
