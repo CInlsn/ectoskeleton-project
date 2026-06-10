@@ -29,6 +29,7 @@
 #include "controller.h"
 #include "imu.h"
 #include "board_com.h"
+#include "gongwang.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -87,16 +88,32 @@ const osThreadAttr_t controller_attributes = {
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+
+osThreadId_t USBHandle;
+const osThreadAttr_t USB_attributes = {
+  .name = "USBTask",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
 osThreadId_t comHandle;
 const osThreadAttr_t com_attributes = {
   .name = "comTask",
   .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
+
 osThreadId_t imuHandle;
 const osThreadAttr_t imu_attributes = {
   .name = "imuTask",
   .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
+};
+
+osThreadId_t gongwangHandle;
+const osThreadAttr_t gongwang_attributes = {
+  .name = "gongwangTask",
+  .stack_size = 256 * 4,
   .priority = (osPriority_t) osPriorityNormal,
 };
 /* USER CODE END FunctionPrototypes */
@@ -141,8 +158,10 @@ void MX_FREERTOS_Init(void) {
 //	xout_can1_Handle = osThreadNew(XoutTask_CAN1, NULL, &xout_can1_attributes);
 //	xout_can2_Handle = osThreadNew(XoutTask_CAN2, NULL, &xout_can2_attributes);
 	controllerHandle = osThreadNew(controller_Handle, NULL, &controller_attributes);
+	USBHandle = osThreadNew(USB_Task, NULL, &USB_attributes);
 	comHandle = osThreadNew(comTask, NULL, &com_attributes);
 	imuHandle = osThreadNew(imu_Task, NULL, &imu_attributes);
+	gongwangHandle = osThreadNew(GongWang_Task, NULL, &gongwang_attributes);
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
 

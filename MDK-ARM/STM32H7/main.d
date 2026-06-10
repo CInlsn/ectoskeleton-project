@@ -75,3 +75,4 @@ stm32h7\main.o: ../User/Devices/DM_Motor/dm_drv.h
 stm32h7\main.o: ../User/Devices/Joint_control/dm_info.h
 stm32h7\main.o: ../Drivers/CMSIS/DSP/Include/arm_math.h
 stm32h7\main.o: D:\Keil\ARM\ARMCC\Bin\..\include\float.h
+stm32h7\main.o: ../Components/gongwang.h

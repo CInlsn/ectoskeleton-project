@@ -61,5 +61,17 @@ stm32h7\freertos.o: ../Core/Inc/fdcan.h
 stm32h7\freertos.o: ../User/bsp/can_bsp.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/dm_info.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/controller.h
+stm32h7\freertos.o: ../USB_DEVICE/App/usbd_cdc_if.h
+stm32h7\freertos.o: ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h
+stm32h7\freertos.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
+stm32h7\freertos.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
+stm32h7\freertos.o: ../USB_DEVICE/Target/usbd_conf.h
+stm32h7\freertos.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdio.h
+stm32h7\freertos.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32h7\freertos.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
+stm32h7\freertos.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
+stm32h7\freertos.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
+stm32h7\freertos.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/imu.h
 stm32h7\freertos.o: ../User/Devices/Joint_control/board_com.h
+stm32h7\freertos.o: ../Components/gongwang.h

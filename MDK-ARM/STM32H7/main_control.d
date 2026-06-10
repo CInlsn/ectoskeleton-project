@@ -58,5 +58,15 @@ stm32h7\main_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/depre
 stm32h7\main_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
 stm32h7\main_control.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
 stm32h7\main_control.o: ..\User\Devices\Joint_control\controller.h
+stm32h7\main_control.o: ../USB_DEVICE/App/usbd_cdc_if.h
+stm32h7\main_control.o: ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc/usbd_cdc.h
+stm32h7\main_control.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
+stm32h7\main_control.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_def.h
+stm32h7\main_control.o: ../USB_DEVICE/Target/usbd_conf.h
+stm32h7\main_control.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdio.h
 stm32h7\main_control.o: D:\Keil\ARM\ARMCC\Bin\..\include\stdlib.h
+stm32h7\main_control.o: D:\Keil\ARM\ARMCC\Bin\..\include\string.h
+stm32h7\main_control.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
+stm32h7\main_control.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
+stm32h7\main_control.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
 stm32h7\main_control.o: ..\User\Devices\Joint_control\func_lib.h

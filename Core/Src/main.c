@@ -35,6 +35,7 @@
 #include "can_bsp.h"
 #include "dm_drv.h"
 #include "arm_math.h"
+#include "gongwang.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -138,6 +139,7 @@ int main(void)
 
 
 	HAL_TIM_Base_Start_IT(&htim2);
+	GongWang_Init();
   /* USER CODE END 2 */
 
   /* Init scheduler */

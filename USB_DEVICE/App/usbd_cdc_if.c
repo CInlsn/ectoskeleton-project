@@ -22,6 +22,7 @@
 #include "usbd_cdc_if.h"
 
 /* USER CODE BEGIN INCLUDE */
+#include "main_control.h"
 
 /* USER CODE END INCLUDE */
 
@@ -264,7 +265,7 @@ static int8_t CDC_Control_HS(uint8_t cmd, uint8_t* pbuf, uint16_t length)
 static int8_t CDC_Receive_HS(uint8_t* Buf, uint32_t *Len)
 {
   /* USER CODE BEGIN 11 */
-	CDC_Transmit_HS(Buf, *Len);
+  USB_StateRx_ProcessBytes(Buf, *Len);
   USBD_CDC_SetRxBuffer(&hUsbDeviceHS, &Buf[0]);
   USBD_CDC_ReceivePacket(&hUsbDeviceHS);
   return (USBD_OK);
@@ -316,7 +317,19 @@ static int8_t CDC_TransmitCplt_HS(uint8_t *Buf, uint32_t *Len, uint8_t epnum)
 }
 
 /* USER CODE BEGIN PRIVATE_FUNCTIONS_IMPLEMENTATION */
+uint8_t CDC_TxReady_HS(void)
+{
+    USBD_CDC_HandleTypeDef *hcdc;
 
+    if (hUsbDeviceHS.pClassData == NULL)
+    {
+        return 0;
+    }
+
+    hcdc = (USBD_CDC_HandleTypeDef*)hUsbDeviceHS.pClassData;
+
+    return (hcdc->TxState == 0);
+}
 /* USER CODE END PRIVATE_FUNCTIONS_IMPLEMENTATION */
 
 /**

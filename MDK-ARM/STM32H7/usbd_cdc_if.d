@@ -55,3 +55,17 @@ stm32h7\usbd_cdc_if.o: ../Drivers/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pcd_ex.
 stm32h7\usbd_cdc_if.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_core.h
 stm32h7\usbd_cdc_if.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ioreq.h
 stm32h7\usbd_cdc_if.o: ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc/usbd_ctlreq.h
+stm32h7\usbd_cdc_if.o: ../User/Devices/Joint_control/main_control.h
+stm32h7\usbd_cdc_if.o: ../User/Devices/DM_Motor/dm_drv.h
+stm32h7\usbd_cdc_if.o: ../Core/Inc/fdcan.h
+stm32h7\usbd_cdc_if.o: ../User/bsp/can_bsp.h
+stm32h7\usbd_cdc_if.o: ../User/Devices/Joint_control/dm_info.h
+stm32h7\usbd_cdc_if.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h
+stm32h7\usbd_cdc_if.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+stm32h7\usbd_cdc_if.o: ../Core/Inc/FreeRTOSConfig.h
+stm32h7\usbd_cdc_if.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+stm32h7\usbd_cdc_if.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+stm32h7\usbd_cdc_if.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+stm32h7\usbd_cdc_if.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+stm32h7\usbd_cdc_if.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+stm32h7\usbd_cdc_if.o: ../User/Devices/Joint_control/controller.h

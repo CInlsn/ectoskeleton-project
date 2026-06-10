@@ -64,6 +64,7 @@
 "stm32h7\bmi088__driver.o"
 "stm32h7\bmi088middleware.o"
 "stm32h7\pid.o"
+"stm32h7\gongwang.o"
 "stm32h7\usb_device.o"
 "stm32h7\usbd_desc.o"
 "stm32h7\usbd_cdc_if.o"
